@@ -1,17 +1,40 @@
 package level1.ejercicio1;
 
+import java.io.File;
+import java.util.Arrays;
+
 public class DirectoryLister {
 
-    public static void main(String[] args) {
+    public void listDirectory(String path) {
 
-        if (args.length == 0) {
-            System.out.println("Please provide a directory path.");
+        File directory = new File(path);
+
+        if (!directory.exists()) {
+            System.out.println("The specified path does not exist.");
             return;
         }
 
-        String path = args[0];
+        if (!directory.isDirectory()) {
+            System.out.println("The specified path is not a directory.");
+            return;
+        }
 
-        DirectoryService service = new DirectoryService();
-        service.listDirectory(path);
+        File[] files = directory.listFiles();
+
+        if (files == null) {
+            System.out.println("Unable to access directory content.");
+            return;
+        }
+
+        if (files.length == 0) {
+            System.out.println("The directory is empty.");
+            return;
+        }
+
+        Arrays.sort(files);
+
+        for (File file : files) {
+            System.out.println(file.getName());
+        }
     }
 }
