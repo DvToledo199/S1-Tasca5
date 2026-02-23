@@ -1,5 +1,10 @@
 # Sprint 1 - Task 5
 
+## General Requirements
+
+All exercises are executable from the command line using Maven.
+Relative paths are used to ensure portability.
+
 ## Level 1 - Exercise 1
 
 ---
@@ -61,12 +66,23 @@ This structure follows the Single Responsibility Principle (SRP).
 
 ---
 
+## How to Compile
+
+From the project root (where `pom.xml` is located):
+
+mvn clean compile
+
+---
+
 ## How to Run
 
-Compile the project and execute it from the command line by providing a directory path as an argument:
+From the project root:
 
-java DirectoryApplication /path/to/directory
+mvn exec:java -Dexec.mainClass="level1.ejercicio1.DirectoryApplication" -Dexec.args="directoryPath"
 
+Example:
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio1.DirectoryApplication" -Dexec.args="."
 ---
 
 ## Level 1 - Exercise 2
@@ -320,3 +336,113 @@ mvn exec:java -Dexec.mainClass="level1.ejercicio4.DirectoryApplication" -Dexec.a
 Example:
 
 mvn exec:java -Dexec.mainClass="level1.ejercicio4.DirectoryApplication" -Dexec.args="target/output.txt"
+
+---
+
+## Level 1 - Exercise 5
+
+---
+
+## Original Statement (Catalan)
+
+Ara el programa ha de serialitzar un Objecte Java a un fitxer `.ser` i després l’ha de desserialitzar.
+
+---
+
+## Description
+
+This exercise adds Java object serialization and deserialization functionality.
+
+The base implementation from Exercise 4 has not been modified.  
+All previous functionality (directory listing, recursive tree generation, TXT writing and reading) remains intact.
+
+To maintain clean architecture and separation of responsibilities:
+
+- New classes have been created:
+    - `Person`
+    - `PersonSerializer`
+    - `PersonApplication`
+- A new `main` class (`PersonApplication`) has been introduced to isolate serialization logic from directory management logic.
+- `DirectoryApplication` remains responsible only for directory and TXT operations.
+
+This ensures that each class has a single responsibility and avoids mixing unrelated functionality.
+
+---
+
+## Design Decisions
+
+- `Person` implements `Serializable` to allow object serialization.
+- `serialVersionUID` has been defined to ensure class version compatibility.
+- `PersonSerializer` contains two static methods:
+- `serialize(Person person, String path)`
+- `deserialize(String path)`
+- Serialization and deserialization logic are separated from application logic.
+- A dedicated `PersonApplication` class has been created to execute Exercise 5 independently.
+
+This approach follows the Single Responsibility Principle (SRP) and keeps the project modular and maintainable.
+
+---
+
+## How to Compile
+
+From the project root (where `pom.xml` is located):
+
+mvn clean compile
+
+---
+
+## How to Run Exercise 5
+
+To execute only the serialization and deserialization functionality:
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio5.PersonApplication"
+
+---
+
+## Expected Behaviour
+
+When executed:
+
+1. A `Person` object is created.
+2. The object is serialized into:
+
+   target/person.ser
+
+3. The same object is then deserialized.
+4. The reconstructed object is printed to the console.
+
+Expected console output:
+
+Person{name='David', age=30}
+
+---
+
+## How to Verify Correctness (Step-by-Step for Reviewer)
+
+1. Compile the project:
+
+   mvn clean compile
+
+2. Execute the PersonApplication:
+
+   mvn exec:java -Dexec.mainClass="level1.ejercicio5.PersonApplication"
+
+3. Verify that the file has been created:
+
+   ls target
+
+   The file `person.ser` should appear.
+
+4. Confirm that the console prints:
+
+   Person{name='David', age=30}
+
+If both the file creation and console output are correct, the exercise works as expected.
+
+---
+
+## Notes
+
+- The directory listing logic from Exercises 1–4 remains unchanged.
+- Exercise 5 introduces object serialization without altering previous functionality.
+- All code follows clean separation of responsibilities and basic Java I/O best practices.
