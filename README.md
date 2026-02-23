@@ -222,3 +222,101 @@ mvn exec:java -Dexec.mainClass="level1.ejercicio3.DirectoryApplication" -Dexec.a
 After execution, the generated file can be found at:
 
 target/output.txt
+
+---
+
+## Level 1 - Exercise 4
+
+---
+
+## Original Statement (Catalan)
+
+Afegeix la funcionalitat de llegir qualsevol fitxer TXT i mostra el seu contingut per consola.
+
+---
+
+## Description
+
+This exercise extends the previous implementation by adding the ability to read any TXT file and display its content in the console.
+
+The application now behaves depending on the type of path received as a command-line argument:
+
+- If the path corresponds to a directory, the program generates the directory tree and stores it in `target/output.txt` (Exercise 3 functionality).
+- If the path corresponds to a TXT file, the program reads its content and prints it to the console.
+
+A new class, `TextFileReader`, has been introduced to handle file reading operations while maintaining separation of responsibilities.
+
+---
+
+## Project Structure
+
+- DirectoryApplication → Entry point of the program. Decides whether to list a directory or read a file.
+- DirectoryLister → Generates the directory tree as a String.
+- TextFileReader → Reads a TXT file and returns its content as a String.
+
+The solution maintains the Single Responsibility Principle (SRP):
+
+- DirectoryLister → Responsible only for generating directory structure.
+- TextFileReader → Responsible only for reading text files.
+- DirectoryApplication → Responsible for controlling program flow.
+
+---
+
+## Technologies Used
+
+- Java
+- java.io.File
+- java.io.FileWriter
+- java.io.FileReader
+- java.io.BufferedReader
+- java.util.Arrays
+- java.util.Date
+- Maven
+- Command-line execution
+
+---
+
+## Features
+
+- Detects whether the provided path is a directory or a file
+- Generates and saves directory tree to `target/output.txt`
+- Reads any TXT file and prints its content
+- Recursive directory traversal
+- Alphabetical sorting at each level
+- Proper resource management (closing streams)
+- Exception handling using try-catch
+- Executable from the command line using Maven
+
+---
+
+## How to Compile
+
+From the project root (where `pom.xml` is located):
+
+mvn clean compile
+
+---
+
+## How to Run
+
+### 1. Generate directory tree and save it to a file
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio4.DirectoryApplication" -Dexec.args="directoryPath"
+
+Example:
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio4.DirectoryApplication" -Dexec.args="."
+
+This will generate:
+
+target/output.txt
+
+---
+
+### 2. Read a TXT file and print its content
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio4.DirectoryApplication" -Dexec.args="path/to/file.txt"
+
+Example:
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio4.DirectoryApplication" -Dexec.args="target/output.txt"
