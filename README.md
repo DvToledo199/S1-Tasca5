@@ -139,3 +139,86 @@ mvn exec:java -Dexec.mainClass="level1.ejercicio2.DirectoryApplication" -Dexec.a
 Example:
 
 mvn exec:java -Dexec.mainClass="level1.ejercicio2.DirectoryApplication" -Dexec.args="."
+
+---
+
+## Level 1 - Exercise 3
+
+---
+
+## Original Statement (Catalan)
+
+Modifica l’exercici anterior. Ara, en lloc de mostrar el resultat per la pantalla, guarda el resultat en un fitxer TXT.
+
+---
+
+## Description
+
+This exercise modifies the previous implementation by changing the output destination.
+
+Instead of printing the directory tree structure to the console, the program now stores the result in a TXT file.
+
+The directory structure is first built using a StringBuilder, keeping the traversal logic separated from the output mechanism. Once the full directory tree is generated as a String, it is written to a text file located in the `target` directory.
+
+This design improves separation of responsibilities and prepares the project for future extensions.
+
+---
+
+## Project Structure
+
+- DirectoryApplication → Handles command-line arguments and manages file writing.
+- DirectoryLister → Builds and returns the directory tree structure as a String.
+
+The solution maintains the Single Responsibility Principle (SRP):
+
+- DirectoryLister → Responsible only for generating the directory tree.
+- DirectoryApplication → Responsible for deciding how to use or store the generated result.
+
+---
+
+## Technologies Used
+
+- Java
+- java.io.File
+- java.io.FileWriter
+- java.util.Arrays
+- java.util.Date
+- Maven
+- Command-line execution
+
+---
+
+## Features
+
+- Recursive directory traversal
+- Alphabetical sorting at each level
+- Directory and file type identification (D / F)
+- Last modification date display
+- Directory tree generation using StringBuilder
+- Output saved into `target/output.txt`
+- Proper exception handling using try-catch
+- Executable from the command line using Maven
+
+---
+
+## How to Compile
+
+From the project root (where `pom.xml` is located):
+
+mvn clean compile
+
+---
+
+## How to Run
+
+From the project root:
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio3.DirectoryApplication" -Dexec.args="directoryPath"
+
+Example:
+
+mvn exec:java -Dexec.mainClass="level1.ejercicio3.DirectoryApplication" -Dexec.args="."
+
+After execution, the generated file can be found at:
+
+target/output.txt
