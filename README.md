@@ -446,3 +446,79 @@ If both the file creation and console output are correct, the exercise works as 
 - The directory listing logic from Exercises 1–4 remains unchanged.
 - Exercise 5 introduces object serialization without altering previous functionality.
 - All code follows clean separation of responsibilities and basic Java I/O best practices.
+
+---
+
+# Level 2
+
+---
+
+## Exercise 1
+
+### Original Statement (Catalan)
+
+Executa l'exercici 3 del nivell anterior parametritzant tots els mètodes en un fitxer de configuració.
+
+Directori a llegir.  
+Nom i directori del fitxer TXT resultant.
+
+### Description
+
+This exercise extends Level 1 – Exercise 3 by externalizing configuration.
+
+Instead of hardcoding the directory to read and the output file path, the application now reads these values from an external configuration file:
+
+```
+config.properties
+```
+
+Example:
+
+```
+input.directory=.
+output.file=target/output.txt
+```
+
+A new class `ConfigLoader` has been introduced to handle configuration loading.
+
+### Project Structure
+
+- `DirectoryApplication`
+- `DirectoryLister`
+- `ConfigLoader`
+
+### Technologies Used
+
+- Java
+- `java.util.Properties`
+- `java.io.FileInputStream`
+- Maven
+
+### How to Compile
+
+```bash
+mvn clean compile
+```
+
+### How to Run
+
+```bash
+mvn exec:java -Dexec.mainClass="level2.ejercicio1.DirectoryApplication"
+```
+
+### How to Verify
+
+1. Ensure `config.properties` exists in the project root.
+2. Run the program.
+3. Check that the output file defined in `config.properties` is generated.
+4. Modify `config.properties` values and run again to confirm behavior changes without recompiling.
+
+---
+
+# Final Notes
+
+- All exercises are executable from the command line.
+- Relative paths are used for portability.
+- Clean architecture and SRP principles have been applied.
+- Configuration is separated from business logic.
+- The project is fully Maven-compatible.
