@@ -2,8 +2,8 @@
 
 ## General Requirements
 
-All exercises are executable from the command line using Maven.
-Relative paths are used to ensure portability.
+
+All exercises are executed from the terminal using Maven. Some exercises display results directly in the console, while others generate files that must be checked manually.
 
 ## Level 1 - Exercise 1
 
